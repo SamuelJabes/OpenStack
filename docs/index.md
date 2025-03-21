@@ -6,11 +6,11 @@
     2025.1
 
 
-## KIT-P
+## KIT-M
 
-João da Silva
+Samuel Jabes
 
-Pedro de Souza
+Lucas Filizola
 
 
 ## Entregas
