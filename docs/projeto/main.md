@@ -342,6 +342,7 @@ docker compose up -d
 
 ## Vídeo de Demonstração
 
-\
-*Vídeo demonstrando fluxo de registro, login e consulta.*
+[![Demonstração do Projeto](https://img.youtube.com/vi/tYiMCcTRJI8/maxresdefault.jpg)](https://www.youtube.com/watch?v=tYiMCcTRJI8)
+
+*Clique na imagem acima para assistir ao vídeo demonstrando o fluxo de registro, login e consulta.*
 
