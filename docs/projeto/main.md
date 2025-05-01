@@ -112,17 +112,19 @@ Content-Type: application/json
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    actor Samuel
-    Samuel->>+App: POST /login
-    App->>+Postgres: SELECT hash_password FROM users WHERE email = Samuel.email
-    alt usuário não encontrado ou senha inválida
-      App-->>-Samuel: 401 Unauthorized
-    else credenciais válidas
-      App->>App: gera JWT
-      App-->>-Samuel: 200 OK + { jwt }
-    end
+  autonumber
+  actor Samuel
+  Samuel->>+App: POST /login
+  App->>+Postgres: SELECT hash_password FROM users WHERE email = Samuel.email
+  alt usuário não encontrado ou senha inválida
+    App-->>-Samuel: 401 Unauthorized
+  else credenciais válidas
+    App->>App: gera JWT
+    App-->>-Samuel: 200 OK + { jwt }
+  end
+  deactivate App
 ```
+
 
 ---
 
