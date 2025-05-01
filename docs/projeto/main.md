@@ -34,7 +34,7 @@ A **Simple Authentication API** fornece:
 A aplicação segue boas práticas de segurança:
 
 - **Nunca** armazena senhas em texto claro.
-- **JWT** com expiração para proteger endpoints.
+- **JWT** para proteger endpoints.
 - Conexão ao PostgreSQL via variáveis de ambiente.
 
 ---
