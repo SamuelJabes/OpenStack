@@ -114,15 +114,24 @@ Content-Type: application/json
 sequenceDiagram
   autonumber
   actor Samuel
+  participant App
+  participant Postgres
+
   Samuel->>+App: POST /login
   App->>+Postgres: SELECT hash_password FROM users WHERE email = Samuel.email
+
   alt usuário não encontrado ou senha inválida
-    App-->>-Samuel: 401 Unauthorized
+    Postgres-->>App: (nenhum registro)     <!-- retorna sem desativar Postgres -->
+    App-->>Samuel: 401 Unauthorized         <!-- retorna sem desativar App -->
   else credenciais válidas
+    Postgres-->>App: hash correto
     App->>App: gera JWT
-    App-->>-Samuel: 200 OK + { jwt }
+    App-->>Samuel: 200 OK + { jwt }
   end
+
+  deactivate Postgres
   deactivate App
+
 ```
 
 
@@ -149,17 +158,24 @@ Authorization: Bearer <JWT>
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    actor Samuel
-    Samuel->>+App: GET /consultar (JWT)
-    App->>App: valida JWT
-    alt JWT inválido
-      App-->>-Samuel: 403 Forbidden
-    else JWT válido
-      App->>Internet: scrap Wise USD→BRL
-      App->>Internet: scrap Wise EUR→BRL
-      App-->>-Samuel: 200 OK + { usd_brl, eur_brl }
-    end
+  autonumber
+  actor Samuel
+  participant App
+  participant Internet
+
+  Samuel->>+App: GET /consultar (JWT)
+  App->>App: valida JWT
+
+  alt JWT inválido
+    App-->>Samuel: 403 Forbidden
+  else JWT válido
+    App->>+Internet: scrap Wise USD→BRL
+    Internet-->>-App: usd_brl
+    App->>+Internet: scrap Wise EUR→BRL
+    Internet-->>-App: eur_brl
+    App-->>-Samuel: 200 OK + { usd_brl, eur_brl }
+  end
+
 ```
 
 #### Detalhes do Web Scraping
