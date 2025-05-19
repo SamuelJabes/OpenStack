@@ -16,8 +16,8 @@ Lucas Filizola
 ## Entregas
 
 - [x] Roteiro 1 - Data 23/02/2025
-- [ ] Roteiro 2
-- [ ] Roteiro 3
+- [x] Roteiro 2 - Data 11/02/2025
+- [x] Roteiro 3 - Data 20/05/2025
 - [ ] Roteiro 4
 - [ ] Projeto
 
