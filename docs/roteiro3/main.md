@@ -509,7 +509,21 @@ A diferença se deve devido a criação de uma nova instância a partir de uma n
 
 #### Tarefa 3
 
-Faça um desenho da sua arquitetura de rede, desde a conexão com o Insper até a instância alocada.
+A arquitetura de rede é algo como:
+
+``` mermaid
+flowchart LR
+    Internet((Internet))
+    Router1([Router 1])
+    Router2([Router 2])
+    Router3([Router 3])
+
+    Internet -->|10.0.0.0/8| Router1
+    Router1 -->|172.16.0.0/20| Router2
+    Router2 -->|192.168.0.0/24| Router3
+    Router3 --> Client
+```
+
 
 ![ARQUITETURA DE REDE](imgs/topology_network.png)
 
@@ -632,7 +646,32 @@ Externa: 172.16.0.0/20
 Assim, ao realizar o túnel para a instância onde o **Load Balancer** está instalado, nós conseguimos acessar a API com esse fluxo de infra criado com o OpenStack:
 
 ```bash
-ssh cloud@10.103.1.22 -L 8001:172.16.15.141:80
+ssh cloud@10.103.1.22 -L 8001:172.16.7.141:80
 ```
 
+Ao abrir `localhost:8001`, obtemos:
 
+![TUNEL](imgs/tunel.png)
+
+
+Então a arquitetura final é algo como:
+
+``` mermaid
+flowchart LR
+    subgraph private [192.169.0.0/24]
+        direction TB
+        lb e2@==> api1[API]
+        lb e3@==> api2[API]
+        api1 e4@==> db
+        api2 e5@==> db
+    end
+    user e1@==>|request<br>172.16.0.0/20| lb
+    e1@{ animate: true }
+    e2@{ animate: true }
+    e3@{ animate: true }
+    e4@{ animate: true }
+    e5@{ animate: true }
+    lb@{ shape: div-rect, label: "Load Balancer" }
+    db@{ shape: cyl, label: "Database" }
+    user@{ img: "https://insper.github.io/computacao-nuvem/assets/images/fontawesome-user-icon.png", constraint: "on", h: 60, label: "User" }
+```
