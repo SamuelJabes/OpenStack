@@ -6,8 +6,6 @@
 
 Agora vamos ver como funciona a separação lógica de recursos para cada usuário. Em vez de criar redes, sub-redes, VMs e roteadores manualmente no Horizon ou CLI, vamos organizar tudo dentro de um domínio com projetos e usuários distintos.
 
-![Topologia de Projetos](imgs/roteiro4_topologia.png)
-
 #### 1. Criar um Domain  
 1. Acesse **Identity > Domains**.  
 2. Clique em **Create Domain**.  
@@ -203,11 +201,27 @@ Para cada aluno, temos:
 2. **Identity > Users**
 ![Users](imgs/users.png)
 3. **Compute > Overview**
-![Overview](imgs/overview.png)
+
+    - Samuel
+![Overview](imgs/overview_sam.png)
+
+    - Lucas
+![Overview](imgs/overview_filis.png)
+
 4. **Compute > Instances**
-![Instances](imgs/instances.png)
+
+    - Samuel
+![Instances](imgs/instances_sam.png)
+
+    - Lucas
+![Instances](imgs/instances_filis.png)
+
 5. **Network Topology**
-![Network Topology](imgs/net_topology.png)
+    - Samuel
+![Network Topology](imgs/topology_sam.png)
+
+    - Lucas
+![Network Topology](imgs/topology_filis.png)
 
 ---
 
